@@ -1,4 +1,4 @@
-resource "aws_cognito_user_pool" "royal_user_pool" {
+resource "aws_cognito_user_pool" "royal_user_pool_2" {
   name = "royalUserPool"
 
   email_verification_subject = "Your Verification Code"
@@ -43,4 +43,11 @@ resource "aws_cognito_user_pool" "royal_user_pool" {
       max_length = 256
     }
   }
+}
+
+resource "aws_cognito_user_pool_client" "royal_user_pool_client" {
+  name                         = "royalUserPoolClient"
+  explicit_auth_flows          = ["ALLOW_USER_PASSWORD_AUTH", "ALLOW_REFRESH_TOKEN_AUTH"]
+
+  user_pool_id = aws_cognito_user_pool.royal_user_pool_2.id
 }
